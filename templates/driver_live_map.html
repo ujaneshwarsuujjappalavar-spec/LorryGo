@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Driver GPS | LorryGo</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 Lorry<span>Go</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('driver_dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="map-page">
+
+    <div class="map-header">
+
+        <div class="find-small">
+            DRIVER GPS
+        </div>
+
+        <h1>
+            Share Your Live Location
+        </h1>
+
+        <p>
+            Start GPS so customers can see the
+            current location of your lorry.
+        </p>
+
+    </div>
+
+
+    <div class="gps-panel">
+
+        <div class="gps-buttons">
+
+            <button
+                id="start-gps"
+                class="main-button"
+                onclick="startDriverGPS()"
+            >
+                📍 Start GPS
+            </button>
+
+
+            <button
+                id="stop-gps"
+                class="secondary-button"
+                onclick="stopDriverGPS()"
+            >
+                Stop GPS
+            </button>
+
+        </div>
+
+
+        <div
+            id="gps-status"
+            class="gps-status"
+        >
+            GPS has not started.
+        </div>
+
+
+        <div
+            id="gps-accuracy"
+            class="gps-status"
+        >
+            Accuracy: --
+        </div>
+
+
+        <div
+            id="coordinates"
+            class="gps-status"
+        >
+            Coordinates: --
+        </div>
+
+    </div>
+
+
+    <div id="map"></div>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script
+    src="{{ url_for('static', filename='map.js') }}">
+</script>
+
+<script>
+
+window.addEventListener(
+    "load",
+    function () {
+
+        startMap();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

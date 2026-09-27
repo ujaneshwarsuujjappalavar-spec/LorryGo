@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find a Lorry | LorryGo</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 Lorry<span>Go</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('index') }}#services">
+            Services
+        </a>
+
+        <a href="{{ url_for('index') }}#about">
+            About
+        </a>
+
+        <a href="{{ url_for('index') }}#how">
+            How It Works
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="find-page">
+
+
+    <!-- HERO -->
+
+    <section class="find-hero">
+
+        <div class="find-small">
+            🚚 LORRYGO TRANSPORT
+        </div>
+
+        <h1>
+            Find the Right
+            <span>Lorry</span>
+            for Your Goods.
+        </h1>
+
+        <p>
+            Enter your pickup and destination locations.
+            Choose an available lorry and book it for
+            your transportation.
+        </p>
+
+    </section>
+
+
+    <!-- JOURNEY -->
+
+    <section class="journey-section">
+
+        <div class="journey-card">
+
+            <div class="journey-title">
+
+                <span>
+                    📍
+                </span>
+
+                <div>
+
+                    <h2>
+                        Plan Your Journey
+                    </h2>
+
+                    <p>
+                        Tell us where your goods need to go.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form method="GET"
+                  action="{{ url_for('find_lorry') }}">
+
+                <div class="journey-grid">
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Pickup Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="pickup"
+                            value="{{ pickup }}"
+                            placeholder="Example: Davanagere"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Destination
+                        </label>
+
+                        <input
+                            type="text"
+                            name="destination"
+                            value="{{ destination }}"
+                            placeholder="Example: Bengaluru"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Distance (KM)
+                        </label>
+
+                        <input
+                            type="number"
+                            name="distance"
+                            value="{{ distance }}"
+                            placeholder="120"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="search-button"
+                >
+                    🔍 Find Available Lorries
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- LORRIES -->
+
+    <section class="lorry-section">
+
+        <div class="lorry-heading">
+
+            <div class="find-small">
+                🚚 AVAILABLE TRANSPORT
+            </div>
+
+            <h2>
+                Available <span>Lorries</span>
+            </h2>
+
+            <p>
+                Choose the lorry that fits your
+                transportation requirement.
+            </p>
+
+        </div>
+
+
+        {% if lorries %}
+
+        <div class="lorry-grid">
+
+            {% for lorry in lorries %}
+
+            <article class="lorry-card">
+
+
+                <div class="lorry-visual">
+
+                    {% if lorry["lorry_type"] == "Heavy Lorry" %}
+
+                        <span>🚛</span>
+
+                    {% elif lorry["lorry_type"] == "Medium Lorry" %}
+
+                        <span>🚚</span>
+
+                    {% else %}
+
+                        <span>🚐</span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="lorry-content">
+
+                    <div class="lorry-type">
+                        {{ lorry["lorry_type"] }}
+                    </div>
+
+                    <h3>
+                        {{ lorry["vehicle_number"] }}
+                    </h3>
+
+
+                    <div class="lorry-details">
+
+                        <div class="detail-box">
+
+                            <span>
+                                Capacity
+                            </span>
+
+                            <strong>
+                                {{ lorry["capacity"] }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-box">
+
+                            <span>
+                                Status
+                            </span>
+
+                            <strong class="available">
+
+                                <i></i>
+
+                                {{ lorry["status"] }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="price">
+
+                        ₹{{ lorry["price_per_km"] }}
+
+                        <span>
+                            / KM
+                        </span>
+
+                    </div>
+
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('book_lorry') }}"
+                        class="booking-form"
+                    >
+
+                        <input
+                            type="hidden"
+                            name="lorry_id"
+                            value="{{ lorry['id'] }}"
+                        >
+
+
+                        <div class="booking-input">
+
+                            <label>
+                                Pickup Location
+                            </label>
+
+                            <input
+                                type="text"
+                                name="pickup_location"
+                                value="{{ pickup }}"
+                                placeholder="Enter pickup location"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="booking-input">
+
+                            <label>
+                                Destination
+                            </label>
+
+                            <input
+                                type="text"
+                                name="drop_location"
+                                value="{{ destination }}"
+                                placeholder="Enter destination"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="booking-input">
+
+                            <label>
+                                Distance
+                            </label>
+
+                            <input
+                                type="number"
+                                name="distance"
+                                value="{{ distance }}"
+                                placeholder="Distance in KM"
+                                min="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="book-button"
+                        >
+                            🚚 Book This Lorry
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-lorries">
+
+            <div>
+                🚚
+            </div>
+
+            <h2>
+                No Lorries Available
+            </h2>
+
+            <p>
+                There are currently no available lorries.
+                Please try again later.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+
+<footer class="lorry-footer">
+
+    <div class="footer-logo">
+        🚚 Lorry<strong>Go</strong>
+    </div>
+
+    <p>
+        Load • Transport • Deliver
+    </p>
+
+    <div class="footer-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('index') }}#services">
+            Services
+        </a>
+
+        <a href="{{ url_for('index') }}#about">
+            About
+        </a>
+
+        <a href="{{ url_for('index') }}#how">
+            How It Works
+        </a>
+
+    </div>
+
+    <p class="copyright">
+        © 2026 LorryGo. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>

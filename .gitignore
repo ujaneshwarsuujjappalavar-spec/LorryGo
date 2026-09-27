@@ -1,0 +1,26 @@
+@"
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# SQLite database
+lorry_transport.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment / secret files
+.env
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
+"@ | Set-Content .gitignore

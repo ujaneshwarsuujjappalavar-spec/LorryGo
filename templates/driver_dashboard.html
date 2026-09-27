@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Driver Dashboard | LorryGo</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 Lorry<span>Go</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('driver_dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('driver_live_map') }}">
+            GPS
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="driver-page">
+
+
+    <div class="driver-header">
+
+        <div class="find-small">
+            DRIVER DASHBOARD
+        </div>
+
+        <h1>
+            Welcome, {{ driver["name"] }} 👋
+        </h1>
+
+        <p>
+            Manage your lorry, bookings and live GPS.
+        </p>
+
+    </div>
+
+
+    <div class="driver-info-grid">
+
+
+        <div class="driver-info-card">
+
+            <h2>
+                👨‍✈️ Driver Details
+            </h2>
+
+            <p>
+                <strong>Name:</strong>
+                {{ driver["name"] }}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                {{ driver["email"] }}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                {{ driver["phone"] }}
+            </p>
+
+        </div>
+
+
+        <div class="driver-info-card">
+
+            <h2>
+                🚚 Lorry Details
+            </h2>
+
+            <p>
+                <strong>Vehicle:</strong>
+                {{ driver["vehicle_number"] }}
+            </p>
+
+            <p>
+                <strong>Type:</strong>
+                {{ driver["lorry_type"] }}
+            </p>
+
+            <p>
+                <strong>Capacity:</strong>
+                {{ driver["capacity"] }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ driver["status"] }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="driver-actions">
+
+        <a
+            href="{{ url_for('driver_live_map') }}"
+            class="main-button"
+        >
+            📍 Start Live GPS
+        </a>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="secondary-button"
+        >
+            Logout
+        </a>
+
+    </div>
+
+
+    <div class="page-title">
+
+        <div class="find-small">
+            BOOKING REQUESTS
+        </div>
+
+        <h1>
+            Customer Requests
+        </h1>
+
+    </div>
+
+
+    {% if bookings %}
+
+    <div class="booking-list">
+
+        {% for booking in bookings %}
+
+        <div class="booking-item">
+
+            <div class="booking-header">
+
+                <h3>
+                    Booking #{{ booking["id"] }}
+                </h3>
+
+                <div class="booking-status">
+                    {{ booking["status"] }}
+                </div>
+
+            </div>
+
+
+            <div class="booking-info">
+
+                <div class="info-box">
+
+                    <span>
+                        Customer
+                    </span>
+
+                    <strong>
+                        {{ booking["customer_name"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Pickup
+                    </span>
+
+                    <strong>
+                        {{ booking["pickup_location"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Destination
+                    </span>
+
+                    <strong>
+                        {{ booking["drop_location"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Price
+                    </span>
+
+                    <strong>
+                        ₹{{ booking["price"] }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            {% if booking["status"] == "Booked" %}
+
+            <form
+                method="POST"
+                action="{{ url_for('accept_booking') }}"
+                style="margin-top:20px;"
+            >
+
+                <input
+                    type="hidden"
+                    name="booking_id"
+                    value="{{ booking['id'] }}"
+                >
+
+                <button
+                    type="submit"
+                    class="accept-button"
+                >
+                    ✓ Accept Booking
+                </button>
+
+            </form>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="no-lorries">
+
+        <div>
+            📦
+        </div>
+
+        <h2>
+            No Booking Requests
+        </h2>
+
+        <p>
+            Customer bookings for your lorry
+            will appear here.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

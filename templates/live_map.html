@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Live Tracking | LorryGo</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 Lorry<span>Go</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('track_delivery') }}">
+            Track
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="map-page">
+
+    <div class="map-header">
+
+        <div class="find-small">
+            LIVE TRACKING
+        </div>
+
+        <h1>
+            Track Your Lorry
+        </h1>
+
+        <p>
+            The map automatically updates the driver's
+            latest GPS location.
+        </p>
+
+    </div>
+
+
+    <div class="gps-panel">
+
+        <h2>
+            🚚 Driver Location
+        </h2>
+
+        <div
+            id="customer-status"
+            class="gps-status"
+        >
+            Searching for driver location...
+        </div>
+
+        <div
+            id="driver-info"
+            class="gps-status"
+        >
+            Driver: --
+        </div>
+
+        <div
+            id="vehicle-info"
+            class="gps-status"
+        >
+            Vehicle: --
+        </div>
+
+        <div
+            id="driver-coordinates"
+            class="gps-status"
+        >
+            Location: --
+        </div>
+
+    </div>
+
+
+    <div id="map"></div>
+
+</main>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script
+    src="{{ url_for('static', filename='map.js') }}">
+</script>
+
+<script>
+
+window.addEventListener(
+    "load",
+    function () {
+
+        startCustomerMap(
+            "{{ driver_id }}"
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>

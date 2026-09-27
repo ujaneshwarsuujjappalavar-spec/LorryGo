@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LorryGo | Smart Lorry Transport</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 <span>Lorry</span><strong>Go</strong>
+    </div>
+
+    <div class="nav-links">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#how">How It Works</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+    </div>
+
+</nav>
+
+
+<section class="home-hero">
+
+    <div>
+
+        <div class="hero-small">
+            🚚 SMART LORRY TRANSPORT
+        </div>
+
+        <h1>
+            Move Your Goods.<br>
+            <span>We Move Your Load.</span>
+        </h1>
+
+        <p>
+            Book the right lorry for your goods,
+            from your pickup location to your destination —
+            simple, fast and reliable.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="{{ url_for('login') }}"
+                class="main-button"
+            >
+                🚚 Book a Lorry
+            </a>
+
+            <a
+                href="{{ url_for('driver_register') }}"
+                class="secondary-button"
+            >
+                👨‍✈️ Become a Driver
+            </a>
+
+        </div>
+
+
+        <div class="hero-points">
+
+            <div class="hero-point">
+                🚚 Multiple Lorries
+            </div>
+
+            <div class="hero-point">
+                📍 Live Tracking
+            </div>
+
+            <div class="hero-point">
+                📦 Easy Booking
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="truck-stage">
+
+        <div class="big-truck">
+            🚛
+        </div>
+
+        <div class="truck-caption">
+            <strong>LorryGo Transport</strong><br>
+            Reliable goods transportation from pickup to destination.
+        </div>
+
+    </div>
+
+</section>
+
+
+<section
+    class="home-section"
+    id="how"
+>
+
+    <div class="section-small">
+        HOW IT WORKS
+    </div>
+
+    <h2>
+        Transport Made Simple.
+    </h2>
+
+    <p class="section-description">
+        Move your goods in four simple steps.
+    </p>
+
+
+    <div class="service-grid">
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                📍
+            </div>
+
+            <h3>
+                Enter Locations
+            </h3>
+
+            <p>
+                Enter where your goods need to be
+                picked up and delivered.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                🔍
+            </div>
+
+            <h3>
+                Find a Lorry
+            </h3>
+
+            <p>
+                See available lorries, capacity
+                and estimated price.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                📦
+            </div>
+
+            <h3>
+                Book
+            </h3>
+
+            <p>
+                Select your lorry and confirm
+                the booking.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                📍
+            </div>
+
+            <h3>
+                Track
+            </h3>
+
+            <p>
+                Follow your lorry using
+                live GPS tracking.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section
+    class="home-section"
+    id="services"
+>
+
+    <div class="section-small">
+        OUR SERVICES
+    </div>
+
+    <h2>
+        Everything You Need.
+    </h2>
+
+
+    <div class="service-grid">
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                🚚
+            </div>
+
+            <h3>
+                Find Lorry
+            </h3>
+
+            <p>
+                Find the right lorry based on
+                your transportation needs.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                📦
+            </div>
+
+            <h3>
+                Easy Booking
+            </h3>
+
+            <p>
+                Enter pickup and destination
+                and book your lorry easily.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                📍
+            </div>
+
+            <h3>
+                Live Tracking
+            </h3>
+
+            <p>
+                Track the driver's location
+                using GPS.
+            </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="service-icon">
+                👨‍✈️
+            </div>
+
+            <h3>
+                Driver Network
+            </h3>
+
+            <p>
+                Drivers can register, receive
+                and accept bookings.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section
+    class="home-section"
+    id="about"
+>
+
+    <div class="section-small">
+        ABOUT LORRYGO
+    </div>
+
+    <h2>
+        Transport Made Simple.
+    </h2>
+
+    <p class="section-description">
+        LorryGo connects customers with lorry drivers
+        for reliable goods transportation.
+        From pickup to destination, everything can be
+        managed through one simple platform.
+    </p>
+
+</section>
+
+
+<footer class="lorry-footer">
+
+    <div class="footer-logo">
+        🚚 Lorry<strong>Go</strong>
+    </div>
+
+    <p>
+        Load • Transport • Deliver
+    </p>
+
+    <div class="footer-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="#services">
+            Services
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#how">
+            How It Works
+        </a>
+
+        <a href="{{ url_for('login') }}">
+            Login
+        </a>
+
+    </div>
+
+    <p class="copyright">
+        © 2026 LorryGo. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>

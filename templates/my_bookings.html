@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings | LorryGo</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 Lorry<span>Go</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('find_lorry') }}">
+            Find Lorry
+        </a>
+
+        <a href="{{ url_for('track_delivery') }}">
+            Track
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="booking-page">
+
+    <div class="page-title">
+
+        <div class="find-small">
+            LORRYGO BOOKINGS
+        </div>
+
+        <h1>
+            My Bookings
+        </h1>
+
+        <p>
+            View all your lorry transportation bookings.
+        </p>
+
+    </div>
+
+
+    {% if bookings %}
+
+    <div class="booking-list">
+
+        {% for booking in bookings %}
+
+        <div class="booking-item">
+
+            <div class="booking-header">
+
+                <h3>
+                    Booking #{{ booking["id"] }}
+                </h3>
+
+                <div class="booking-status">
+                    {{ booking["status"] }}
+                </div>
+
+            </div>
+
+
+            <div class="booking-info">
+
+                <div class="info-box">
+
+                    <span>
+                        Lorry
+                    </span>
+
+                    <strong>
+                        {{ booking["vehicle_number"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Pickup
+                    </span>
+
+                    <strong>
+                        {{ booking["pickup_location"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Destination
+                    </span>
+
+                    <strong>
+                        {{ booking["drop_location"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Price
+                    </span>
+
+                    <strong>
+                        ₹{{ booking["price"] }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            {% if booking["driver_name"] %}
+
+            <p style="color:#9eb4d1; margin-top:20px;">
+                👨‍✈️ Driver:
+                <strong>
+                    {{ booking["driver_name"] }}
+                </strong>
+                |
+                📞 {{ booking["driver_phone"] }}
+            </p>
+
+            {% else %}
+
+            <p style="color:#9eb4d1; margin-top:20px;">
+                👨‍✈️ Driver:
+                Waiting for a driver assignment.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="no-lorries">
+
+        <div>
+            📦
+        </div>
+
+        <h2>
+            No Bookings Yet
+        </h2>
+
+        <p>
+            Find a lorry and create your first booking.
+        </p>
+
+        <br>
+
+        <a
+            href="{{ url_for('find_lorry') }}"
+            class="main-button"
+        >
+            Find a Lorry
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

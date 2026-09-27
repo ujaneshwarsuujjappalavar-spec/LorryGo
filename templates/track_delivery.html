@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Track Delivery | LorryGo</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 Lorry<span>Go</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('find_lorry') }}">
+            Find Lorry
+        </a>
+
+        <a href="{{ url_for('my_bookings') }}">
+            Bookings
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="booking-page">
+
+    <div class="page-title">
+
+        <div class="find-small">
+            LIVE TRANSPORT
+        </div>
+
+        <h1>
+            Track Your Delivery
+        </h1>
+
+        <p>
+            Follow your lorry using driver GPS.
+        </p>
+
+    </div>
+
+
+    {% if bookings %}
+
+    <div class="booking-list">
+
+        {% for booking in bookings %}
+
+        <div class="booking-item">
+
+            <div class="booking-header">
+
+                <h3>
+                    🚚 {{ booking["vehicle_number"] }}
+                </h3>
+
+                <div class="booking-status">
+                    {{ booking["status"] }}
+                </div>
+
+            </div>
+
+
+            <div class="booking-info">
+
+                <div class="info-box">
+
+                    <span>
+                        Pickup
+                    </span>
+
+                    <strong>
+                        {{ booking["pickup_location"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Destination
+                    </span>
+
+                    <strong>
+                        {{ booking["drop_location"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Distance
+                    </span>
+
+                    <strong>
+                        {{ booking["distance"] }} KM
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span>
+                        Driver
+                    </span>
+
+                    <strong>
+                        {% if booking["driver_name"] %}
+                            {{ booking["driver_name"] }}
+                        {% else %}
+                            Not assigned
+                        {% endif %}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            {% if booking["driver_id"] %}
+
+            <div style="margin-top:25px;">
+
+                <a
+                    href="{{ url_for('live_map', driver_id=booking['driver_id']) }}"
+                    class="main-button"
+                >
+                    📍 Open Live Map
+                </a>
+
+            </div>
+
+            {% else %}
+
+            <p style="color:#91a9c5; margin-top:20px;">
+                GPS tracking will become available after
+                a driver is assigned to this lorry.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="no-lorries">
+
+        <div>
+            📍
+        </div>
+
+        <h2>
+            Nothing to Track
+        </h2>
+
+        <p>
+            You don't have any bookings yet.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

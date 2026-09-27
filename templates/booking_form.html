@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book a Lorry - LorryGo</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="/" class="logo">
+        🚛 Lorry<span>Go</span>
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/my-bookings">
+            My Bookings
+        </a>
+
+        <a href="/track-delivery">
+            Track Delivery
+        </a>
+
+        <a href="/logout"
+           class="register-btn">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="booking-section">
+
+    <div class="booking-container">
+
+        <div class="booking-title">
+
+            <h2>
+                🚛 Book Your Lorry
+            </h2>
+
+            <p>
+                Enter your goods transportation details
+            </p>
+
+        </div>
+
+
+        {% if error %}
+
+        <div style="
+            background:#ffebee;
+            color:#c62828;
+            padding:15px;
+            border-radius:8px;
+            margin-bottom:20px;
+            text-align:center;
+        ">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <form class="booking-form"
+              method="POST"
+              action="/find-lorry">
+
+
+            <div class="form-group">
+
+                <label>
+                    📍 Pickup Location
+                </label>
+
+                <input
+                    type="text"
+                    name="pickup"
+                    placeholder="Example: Davanagere"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    📍 Destination
+                </label>
+
+                <input
+                    type="text"
+                    name="destination"
+                    placeholder="Example: Bangalore"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    📦 Goods Type
+                </label>
+
+                <select name="goods_type"
+                        required>
+
+                    <option value="">
+                        Select goods type
+                    </option>
+
+                    <option value="Furniture">
+                        Furniture
+                    </option>
+
+                    <option value="Construction Materials">
+                        Construction Materials
+                    </option>
+
+                    <option value="Food Products">
+                        Food Products
+                    </option>
+
+                    <option value="Agricultural Products">
+                        Agricultural Products
+                    </option>
+
+                    <option value="Electronics">
+                        Electronics
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    ⚖ Weight (Tons)
+                </label>
+
+                <input
+                    type="number"
+                    name="weight"
+                    min="0.1"
+                    step="0.1"
+                    placeholder="Example: 5"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    📅 Transport Date
+                </label>
+
+                <input
+                    type="date"
+                    name="booking_date"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="find-lorry-btn">
+
+                🔍 Find Available Lorries
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

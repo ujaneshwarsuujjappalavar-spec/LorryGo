@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | LorryGo</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚚 Lorry<span>Go</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('find_lorry') }}">
+            Find Lorry
+        </a>
+
+        <a href="{{ url_for('my_bookings') }}">
+            My Bookings
+        </a>
+
+        <a href="{{ url_for('track_delivery') }}">
+            Track
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="dashboard-page">
+
+    <div class="dashboard-top">
+
+        <div>
+
+            <div class="hero-small">
+                CUSTOMER DASHBOARD
+            </div>
+
+            <h1>
+                Welcome, {{ user["name"] }} 👋
+            </h1>
+
+            <p>
+                Your goods transportation is just a few
+                clicks away.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="stats-row">
+
+        <div class="stat-card">
+
+            <div class="stat-number">
+                {{ booking_count }}
+            </div>
+
+            <div>
+                Total Bookings
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-number">
+                🚚
+            </div>
+
+            <div>
+                Lorry Booking
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-number">
+                📍
+            </div>
+
+            <div>
+                Live Tracking
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+
+            <div class="icon">
+                🚚
+            </div>
+
+            <h3>
+                Find a Lorry
+            </h3>
+
+            <p>
+                Enter your pickup and destination
+                and find an available lorry.
+            </p>
+
+            <a href="{{ url_for('find_lorry') }}">
+                Find Lorry →
+            </a>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="icon">
+                📦
+            </div>
+
+            <h3>
+                My Bookings
+            </h3>
+
+            <p>
+                View your current and previous
+                transportation bookings.
+            </p>
+
+            <a href="{{ url_for('my_bookings') }}">
+                View Bookings →
+            </a>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="icon">
+                📍
+            </div>
+
+            <h3>
+                Track Delivery
+            </h3>
+
+            <p>
+                Track your lorry driver's location
+                using live GPS.
+            </p>
+
+            <a href="{{ url_for('track_delivery') }}">
+                Track Delivery →
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>
